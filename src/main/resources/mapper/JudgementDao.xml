@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huafeng.springboot.questionnaireoline.dao.JudgementDao">
+
+    <resultMap type="top.huafeng.springboot.questionnaireoline.entity.Judgement" id="JudgementMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="creator" column="creator" jdbcType="INTEGER"/>
+        <result property="authority" column="authority" jdbcType="OTHER"/>
+        <result property="judgeTitle" column="judge_title" jdbcType="VARCHAR"/>
+        <result property="answer" column="answer" jdbcType="VARCHAR"/>
+        <result property="parse" column="parse" jdbcType="VARCHAR"/>
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+        <result property="difficulty" column="difficulty" jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="INTEGER"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="JudgementMap">
+        select
+          id, creator, authority, judge_title, answer, parse, subject_id, difficulty, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.judgement
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="JudgementMap">
+        select
+          id, creator, authority, judge_title, answer, parse, subject_id, difficulty, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.judgement
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="JudgementMap">
+        select
+          id, creator, authority, judge_title, answer, parse, subject_id, difficulty, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.judgement
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="creator != null">
+                and creator = #{creator}
+            </if>
+            <if test="authority != null">
+                and authority = #{authority}
+            </if>
+            <if test="judgeTitle != null and judgeTitle != ''">
+                and judge_title = #{judgeTitle}
+            </if>
+            <if test="answer != null and answer != ''">
+                and answer = #{answer}
+            </if>
+            <if test="parse != null and parse != ''">
+                and parse = #{parse}
+            </if>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="difficulty != null and difficulty != ''">
+                and difficulty = #{difficulty}
+            </if>
+            <if test="gmtCreate != null">
+                and gmt_create = #{gmtCreate}
+            </if>
+            <if test="gmtModified != null">
+                and gmt_modified = #{gmtModified}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into QuestionnaireOnline.judgement(creator, authority, judge_title, answer, parse, subject_id, difficulty, gmt_create, gmt_modified, is_delete)
+        values (#{creator}, #{authority}, #{judgeTitle}, #{answer}, #{parse}, #{subjectId}, #{difficulty}, #{gmtCreate}, #{gmtModified}, #{isDelete})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update QuestionnaireOnline.judgement
+        <set>
+            <if test="creator != null">
+                creator = #{creator},
+            </if>
+            <if test="authority != null">
+                authority = #{authority},
+            </if>
+            <if test="judgeTitle != null and judgeTitle != ''">
+                judge_title = #{judgeTitle},
+            </if>
+            <if test="answer != null and answer != ''">
+                answer = #{answer},
+            </if>
+            <if test="parse != null and parse != ''">
+                parse = #{parse},
+            </if>
+            <if test="subjectId != null">
+                subject_id = #{subjectId},
+            </if>
+            <if test="difficulty != null and difficulty != ''">
+                difficulty = #{difficulty},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from QuestionnaireOnline.judgement where id = #{id}
+    </delete>
+
+</mapper>

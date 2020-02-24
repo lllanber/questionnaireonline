@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huafeng.springboot.questionnaireoline.dao.StuPaperDao">
+
+    <resultMap type="top.huafeng.springboot.questionnaireoline.entity.StuPaper" id="StuPaperMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="stuId" column="stu_id" jdbcType="INTEGER"/>
+        <result property="paperId" column="paper_id" jdbcType="INTEGER"/>
+        <result property="stuScore" column="stu_score" jdbcType="OTHER"/>
+        <result property="singleAnswer" column="single_answer" jdbcType="VARCHAR"/>
+        <result property="singleScore" column="single_score" jdbcType="OTHER"/>
+        <result property="multipleAnswer" column="multiple_answer" jdbcType="VARCHAR"/>
+        <result property="multipleScore" column="multiple_score" jdbcType="OTHER"/>
+        <result property="judementAnswer" column="judement_answer" jdbcType="VARCHAR"/>
+        <result property="judementScore" column="judement_score" jdbcType="OTHER"/>
+        <result property="statementAnswer" column="statement_answer" jdbcType="VARCHAR"/>
+        <result property="statementScore" column="statement_score" jdbcType="OTHER"/>
+        <result property="totalScore" column="total_score" jdbcType="OTHER"/>
+        <result property="limitTime" column="limit_time" jdbcType="INTEGER"/>
+        <result property="gmtStart" column="gmt_start" jdbcType="INTEGER"/>
+        <result property="gmtFinish" column="gmt_finish" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StuPaperMap">
+        select
+          id, stu_id, paper_id, stu_score, single_answer, single_score, multiple_answer, multiple_score, judement_answer, judement_score, statement_answer, statement_score, total_score, limit_time, gmt_start, gmt_finish
+        from QuestionnaireOnline.stu_paper
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StuPaperMap">
+        select
+          id, stu_id, paper_id, stu_score, single_answer, single_score, multiple_answer, multiple_score, judement_answer, judement_score, statement_answer, statement_score, total_score, limit_time, gmt_start, gmt_finish
+        from QuestionnaireOnline.stu_paper
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StuPaperMap">
+        select
+          id, stu_id, paper_id, stu_score, single_answer, single_score, multiple_answer, multiple_score, judement_answer, judement_score, statement_answer, statement_score, total_score, limit_time, gmt_start, gmt_finish
+        from QuestionnaireOnline.stu_paper
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="stuId != null">
+                and stu_id = #{stuId}
+            </if>
+            <if test="paperId != null">
+                and paper_id = #{paperId}
+            </if>
+            <if test="stuScore != null">
+                and stu_score = #{stuScore}
+            </if>
+            <if test="singleAnswer != null and singleAnswer != ''">
+                and single_answer = #{singleAnswer}
+            </if>
+            <if test="singleScore != null">
+                and single_score = #{singleScore}
+            </if>
+            <if test="multipleAnswer != null and multipleAnswer != ''">
+                and multiple_answer = #{multipleAnswer}
+            </if>
+            <if test="multipleScore != null">
+                and multiple_score = #{multipleScore}
+            </if>
+            <if test="judementAnswer != null and judementAnswer != ''">
+                and judement_answer = #{judementAnswer}
+            </if>
+            <if test="judementScore != null">
+                and judement_score = #{judementScore}
+            </if>
+            <if test="statementAnswer != null and statementAnswer != ''">
+                and statement_answer = #{statementAnswer}
+            </if>
+            <if test="statementScore != null">
+                and statement_score = #{statementScore}
+            </if>
+            <if test="totalScore != null">
+                and total_score = #{totalScore}
+            </if>
+            <if test="limitTime != null">
+                and limit_time = #{limitTime}
+            </if>
+            <if test="gmtStart != null">
+                and gmt_start = #{gmtStart}
+            </if>
+            <if test="gmtFinish != null">
+                and gmt_finish = #{gmtFinish}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into QuestionnaireOnline.stu_paper(stu_id, paper_id, stu_score, single_answer, single_score, multiple_answer, multiple_score, judement_answer, judement_score, statement_answer, statement_score, total_score, limit_time, gmt_start, gmt_finish)
+        values (#{stuId}, #{paperId}, #{stuScore}, #{singleAnswer}, #{singleScore}, #{multipleAnswer}, #{multipleScore}, #{judementAnswer}, #{judementScore}, #{statementAnswer}, #{statementScore}, #{totalScore}, #{limitTime}, #{gmtStart}, #{gmtFinish})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update QuestionnaireOnline.stu_paper
+        <set>
+            <if test="stuId != null">
+                stu_id = #{stuId},
+            </if>
+            <if test="paperId != null">
+                paper_id = #{paperId},
+            </if>
+            <if test="stuScore != null">
+                stu_score = #{stuScore},
+            </if>
+            <if test="singleAnswer != null and singleAnswer != ''">
+                single_answer = #{singleAnswer},
+            </if>
+            <if test="singleScore != null">
+                single_score = #{singleScore},
+            </if>
+            <if test="multipleAnswer != null and multipleAnswer != ''">
+                multiple_answer = #{multipleAnswer},
+            </if>
+            <if test="multipleScore != null">
+                multiple_score = #{multipleScore},
+            </if>
+            <if test="judementAnswer != null and judementAnswer != ''">
+                judement_answer = #{judementAnswer},
+            </if>
+            <if test="judementScore != null">
+                judement_score = #{judementScore},
+            </if>
+            <if test="statementAnswer != null and statementAnswer != ''">
+                statement_answer = #{statementAnswer},
+            </if>
+            <if test="statementScore != null">
+                statement_score = #{statementScore},
+            </if>
+            <if test="totalScore != null">
+                total_score = #{totalScore},
+            </if>
+            <if test="limitTime != null">
+                limit_time = #{limitTime},
+            </if>
+            <if test="gmtStart != null">
+                gmt_start = #{gmtStart},
+            </if>
+            <if test="gmtFinish != null">
+                gmt_finish = #{gmtFinish},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from QuestionnaireOnline.stu_paper where id = #{id}
+    </delete>
+
+</mapper>

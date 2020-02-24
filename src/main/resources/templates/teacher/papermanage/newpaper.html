@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:insert="~{/teacher/menu.html :: head}"></head>
+<head>
+    <title>创建新试卷</title>
+</head>
+<body>
+<section id="container">
+    <!-- menu and Navigation   -->
+    <div th:insert="~{/teacher/menu.html :: menu}"></div>
+    <!-- MAIN CONTENT-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper site-min-height" id="app">
+            <!-- 试卷头div 开始 -->
+            <div class="showback container-fluid" style="margin-top: 7px;" >
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="papername"><h2>试卷名 : </h2></label>
+                        <input type="text" v-model="paper.paperName" class="form-control" style="width: 400px;" id="papername" placeholder="请输入试卷名">
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4" >
+                            <label for="totalscore"><h4>当前试卷总分：</h4></label>
+                            <input type="text" v-model="totalscore" class="form-control" style="width: 100px;" id="totalscore" placeholder="自动计算" disabled>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <label for="subject"><h4>请选择科目：</h4></label>
+                            <select class="form-control" id="subject">
+                                <option>第一个科目</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="limittime1"><h4>限制答题时间：</h4></label>
+                                    <input type="text" class="form-control" id="limittime1" placeholder="" style="width: 50px;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="limittime2">小时</label>
+                                    <input type="text" class="form-control" id="limittime2" placeholder="" style="width: 50px;">
+                                    分钟
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!-- 试卷头div结束 -->
+            <!-- 单选div 开始 -->
+            <div class="showback" style="margin-top: 7px;">
+                <h2>单选题</h2>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="exampleInputName2"><h4>单选 每道题分值：</h4></label>
+                        <input type="text" v-model="paper.singleScore" class="form-control" style="width: 100px;" id="exampleInputName2" placeholder="">
+                    </div>
+                </form>
+                <div class="" style="margin-top: 30px;" v-for="(it1,singleindex) in singles" :key="singleindex">
+                    题号：{{singleindex+1}}
+                    <input type="text" class="form-control" v-model="singles[singleindex].singleTitle" placeholder="在这里输入题目,下方填写选项并标记正确答案" style="margin-left: 5px;">
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-group">
+							      <span class="input-group-addon">
+							        <input type="radio" name="optionsRadios" aria-label="...">
+							      </span>
+                                <input type="text" class="form-control" placeholder="A选项" v-model="singles[singleindex].choiceA" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+								    <span class="input-group-addon">
+								      <input type="radio" name="optionsRadios" aria-label="...">
+								    </span>
+                                <input type="text" class="form-control" placeholder="B选项" v-model="singles[singleindex].choiceB" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+								    <span class="input-group-addon">
+								      <input type="radio" name="optionsRadios" aria-label="...">
+								    </span>
+                                <input type="text" class="form-control" placeholder="C选项" v-model="singles[singleindex].choiceC" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+								    <span class="input-group-addon">
+								      <input type="radio" name="optionsRadios" aria-label="...">
+								    </span>
+                                <input type="text" class="form-control" placeholder="D选项" v-model="singles[singleindex].choiceD" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- /.row -->
+                </div>
+                <!-- 添加题目按钮 开始 -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" class="btn btn-default btn-lg" @click="addSingle()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加单选题
+                    </button>
+                </div>
+                <!-- 添加题目按钮 结束 -->
+            </div>
+            <!-- 单选div结束 -->
+            <!-- 多选div开始 -->
+            <div class="showback" style="margin-top: 7px;">
+                <h2>多选题</h2>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="multichoice"><h4>多选 每道题分值：</h4></label>
+                        <input type="text" v-model="paper.multiScore" class="form-control" style="width: 100px;" id="multichoice" placeholder="">
+                    </div>
+                </form>
+                <div class="" style="margin-top: 30px;" v-for="(item,Index) in multis" :key="Index">
+                    题号：{{Index+1}}
+                    <input type="text" class="form-control" v-model="multis[Index].multiTitle" placeholder="在这里输入题目,下方填写选项并标记正确答案" style="margin-left: 5px;">
+                    <br />
+                    <div class="row">
+                        <!-- 选项 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+										<span class="input-group-addon">
+											<input type="checkbox" id="choiceA" v-model="multis[Index].answer" name="checkbox1" value="A" aria-label="...">
+										</span>
+                                <input type="text" class="form-control" v-model="multis[Index].choiceA" placeholder="A选项" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <!-- 选项 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+										<span class="input-group-addon">
+											<input type="checkbox" id="choiceB" v-model="multis[Index].answer" name="checkbox2" value="B" aria-label="...">
+										</span>
+                                <input type="text" class="form-control" v-model="multis[Index].choiceB" placeholder="B选项" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <!-- 选项 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+										<span class="input-group-addon">
+											<input type="checkbox" id="choiceC" v-model="multis[Index].answer" name="checkbox3" value="C" aria-label="...">
+										</span>
+                                <input type="text" class="form-control" v-model="multis[Index].choiceC" placeholder="C选项" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <!-- 选项 -->
+                        <div class="col-lg-6">
+                            <div class="input-group">
+							    <span class="input-group-addon">
+							      <input type="checkbox" id="choiceD" v-model="multis[Index].answer" name="checkbox4" value="D" aria-label="...">
+							    </span>
+                                <input type="text" class="form-control" v-model="multis[Index].choiceD" placeholder="D选项" aria-label="...">
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div>
+                </div>
+                <!-- 添加题目按钮 开始 -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" class="btn btn-default btn-lg" @click="addMulti">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加多选题
+                    </button>
+                </div>
+                <!-- 添加题目按钮 结束 -->
+            </div>
+            <!-- 多选div结束 -->
+            <!-- 判断div开始 -->
+            <div class="showback" style="margin-top: 7px;">
+                <h2>判断题</h2>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="judgescore"><h4>判断 每道题分值：</h4></label>
+                        <input type="text" v-model="paper.judgeScore" class="form-control" style="width: 100px;" id="judgescore" placeholder="">
+                    </div>
+                </form>
+
+                <div class="" style="margin-top: 30px;" v-for="(item,index) in judgements" :key="index">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                            <h5 style="margin-left: 20px;"> 题号:{{index}}在下列输入判断题目</h5>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9">
+                            <div class="form-group">
+                                <textarea class="form-control" v-model="judgements[index].judgeTitle" name="message" id="judgement" placeholder="判断题题目" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                                <!-- <div class="validate"></div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                            <div class="switch switch-square" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                                <input type="checkbox" checked="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 添加题目按钮 开始 -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" class="btn btn-default btn-lg" @click="addJudgement">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加判断题
+                    </button>
+                </div>
+                <!-- 添加题目按钮 结束 -->
+            </div>
+            <!-- 判断div结束 -->
+            <!-- 简答div开始 -->
+            <div class="showback" style="margin-top: 7px;">
+                <h2>简答题</h2>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="statementscore"><h4>简答 每道题分值：</h4></label>
+                        <input type="text" v-model="paper.stateScore" class="form-control" style="width: 100px;" id="statementscore" placeholder="">
+                    </div>
+                </form>
+                <div class="" style="margin-top: 30px;" v-for="(item,index) in statements" :key="index">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h5 style="margin-left: 20px;"> {{index+1}}(ps:请在下列输入框输入题目，简答题需人工判题，无需填入参考答案)</h5>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <textarea class="form-control" v-model="statements[index].stateTitle" name="message" id="contact-message" placeholder="简答题需人工判卷，无需填入参考答案" rows="5" data-rule="required" data-msg="Please write something for us"></textarea>
+                                <!-- <div class="validate"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 添加题目按钮 开始 -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" class="btn btn-default btn-lg" @click="addStatement">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 添加简答题
+                    </button>
+                </div>
+                <!-- 添加题目按钮 结束 -->
+            </div>
+            <!-- 简答div结束 -->
+            <!-- 添加题目按钮 开始 -->
+            <div class="showback">
+                <h4><i class="fa fa-angle-right"></i> 添加题型</h4>
+                <button type="button" class="btn btn-round btn-danger">单选题</button>
+                <!-- 					  <button type="button" class="btn btn-round btn-default">单选题</button> -->
+                <button type="button" class="btn btn-round btn-primary">判断题</button>
+                <button type="button" class="btn btn-round btn-success">多选题</button>
+                <button type="button" class="btn btn-round btn-info">填空题</button>
+                <button type="button" class="btn btn-round btn-warning">简答题</button>
+            </div>
+            <!-- 添加题目按钮 结束 -->
+        </section>
+        <!-- /wrapper -->
+    </section>
+
+</section>
+</body>
+<div th:insert="~{/teacher/menu.html :: commenjs}"></div>
+<!--复选框美化-->
+<script src="/lib/bootstrap-switch.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data(){
+            return{
+                // 试卷对象
+                paper:{
+                    paperName:"",
+                    singleScore:"2",
+                    multiScore:"2",
+                    judgeScore:"2",
+                    stateScore:"5",
+                    paperScore:"",
+                    subjectId:"",
+                    limitTime:""
+                },
+                // 单选题数组
+                singles:[],
+                // 多选题数组
+                multis:[],
+                // 判断题数组
+                judgements:[
+                    {
+                        id:"",
+                        creator:"",
+                        authority:"",
+                        judgeTitle:"",
+                        answer:"",
+                        parse:"",
+                        subject_id:"",
+                        difficulty:"",
+                        gmtCreate:"",
+                        gmtModified:""
+                    }
+                ],
+                // 简答题数组
+                statements:[]
+            }
+        },
+        methods:{
+            // 添加单选题
+            addSingle:function(){
+                // 单选题对象
+                var singleQuestion =
+                    {
+                        questionNo:"",
+                        singleTitle:"",
+                        choiceA:"",
+                        choiceB:"",
+                        choiceC:"",
+                        choiceD:"",
+                        choiceE:"",
+                        choiceF:"",
+                        answer:""
+                    };
+                this.singles.push(singleQuestion);
+                console.log(this.singles);
+            },
+
+            // 添加多选题
+            addMulti:function(){
+                // 多选题对象
+                var multiQuestion =
+                    {
+                        questionNo:1,
+                        multiTitle:"",
+                        choiceA:"",
+                        choiceB:"",
+                        choiceC:"",
+                        choiceD:"",
+                        choiceE:"",
+                        choiceF:"",
+                        answer:[]
+                    };
+                this.multis.push(multiQuestion);
+                console.log(this.multis);
+            },
+
+            // 添加判断题
+            addJudgement:function(){
+                // 判断题对象
+                var judgeQuestion=
+                    {
+                        id:"",
+                        creator:"",
+                        authority:"",
+                        judgeTitle:"",
+                        answer:"",
+                        parse:"",
+                        subject_id:"",
+                        difficulty:"",
+                        gmtCreate:"",
+                        gmtModified:""
+                    };
+                this.judgements.push(judgeQuestion);
+                console.log(this.judgements);
+            },
+
+            addStatement:function(){
+                // 简答题对象
+                var stateQuestion =
+                    {
+                        id:"",
+                        creator:"",
+                        authority:"",
+                        stateTitle:"",
+                        answer:"",
+                        parse:"",
+                        subjectId:"",
+                        difficulty:"",
+                        gmtCreate:"",
+                        gmtModified:""
+                    };
+                this.statements.push(stateQuestion);
+                console.log(this.statements);
+            }
+        },
+        computed: {
+            // 计算试卷总分
+            totalscore:function(){
+                console.log(this.singles.length);
+                return this.paper.singleScore*this.singles.length + this.paper.multiScore*this.multis.length + this.paper.judgeScore*this.judgements.length + this.paper.stateScore*this.statements.length;
+            }
+        }
+    })
+</script>
+</html>

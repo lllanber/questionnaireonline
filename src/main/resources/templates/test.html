@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{/teacher/menu.html :: head}"></head>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div  v-for="(item,index) in items" :key="index">
+        <input type="text" v-model="n1">
+        <input type="text" v-model="n2">
+        {{sum}}
+    </div>
+    <button @click='onAdd()'>添加</button>
+    <button @click='con'>打印数组状态</button>
+
+</div>
+</body>
+<script>
+    var app = new Vue(
+        {
+            el:"#app",
+            data(){
+                return{
+                    n1:'',
+                    n2:'',
+                    items: [
+                        {name:"", sex:""}
+                    ]
+                }
+            },
+            methods: {
+                onAdd() {
+                    var man ={name:"", sex:""}
+                    this.items.push(man);
+                    console.log(this.items);
+                },
+                con(){
+                    console.log(this.sum);
+                }
+            },
+            computed:{
+                sum:function(){
+                    return this.n1+this.n2;
+                }
+            }
+        })
+</script>
+</html>

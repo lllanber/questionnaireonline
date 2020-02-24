@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:insert="~{/teacher/menu.html :: head}"></head>
+<head>
+    <title>我的信息</title>
+    <!-- 选择日期样式 -->
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-datepicker/css/datepicker.css" />
+</head>
+<body>
+<section id="container">
+    <!-- menu and Navigation   -->
+    <div th:insert="~{/teacher/menu.html :: menu}"></div>
+    <!-- MAIN CONTENT-->
+    <!--main content start-->
+    <section class="wrapper site-min-height">
+        <div class="col-lg-8 col-lg-offset-2 detailed mt">
+            <h4 class="mb">Contact Information</h4>
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">工号</label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder=" " id="addr1" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">姓名</label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder=" " id="addr2" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">电话</label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder=" " id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 col-lg-10">
+                            <button class="btn btn-theme" type="submit">Save</button>
+                            <button class="btn btn-theme04" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">邮箱</label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder=" " id="cell" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-3 col-lg-10">
+                            <button class="btn btn-theme" type="submit">Save</button>
+                            <button class="btn btn-theme04" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">出生日期</label>
+                    <div class="col-md-3 col-xs-11">
+                        <div data-date-viewmode="years" data-date-format="dd-mm-yyyy" data-date="01-01-2014" class="input-append date dpYears">
+                            <input type="text" readonly="" value="01-01-2014" size="16" class="form-control">
+                            <span class="input-group-btn add-on">
+					<button class="btn btn-theme" type="button"><i class="fa fa-calendar"></i></button>
+					</span>
+                        </div>
+                        <span class="help-block">选择日期</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</section>
+</body>
+<div th:insert="~{/teacher/menu.html :: commenjs}"></div>
+<!-- 年月日选择 -->
+<script type="text/javascript" src="lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+</html>

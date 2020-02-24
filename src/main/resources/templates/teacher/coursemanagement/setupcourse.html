@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:insert="~{/teacher/menu.html :: head}"></head>
+<head>
+    <title>测试menu</title>
+</head>
+<body>
+<section id="container">
+    <!-- menu and Navigation   -->
+    <div th:insert="~{/teacher/menu.html :: menu}"></div>
+    <!-- MAIN CONTENT-->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i> 所有课程</h3>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">搜索课程</label>
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="输入课程名或编号">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </div>
+            <div class="row mt">
+                <!--  PROFILE 01 PANEL -->
+                <div class="col-lg-3 col-md-3 col-sm-3 mb">
+                    <div class="content-panel pn">
+                        <div id="profile-01">
+                            <h3>课程名</h3>
+                            <h6>描述</h6>
+                        </div>
+                        <div class="profile-01 centered">
+                            <p>开 设 该 课 程</p>
+                        </div>
+                        <div class="centered">
+                            <h6><i class="fa fa-envelope"></i><br/>SHARON@DASHIOTHEME.COM</h6>
+                        </div>
+                    </div>
+                    <!-- /content-panel -->
+                </div>
+                <!-- /col-md-4 -->
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+
+</section>
+</body>
+<div th:insert="~{/teacher/menu.html :: commenjs}"></div>
+</html>

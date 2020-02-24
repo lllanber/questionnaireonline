@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huafeng.springboot.questionnaireoline.dao.TeaStuSubjectDao">
+
+    <resultMap type="top.huafeng.springboot.questionnaireoline.entity.TeaStuSubject" id="TeaStuSubjectMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+        <result property="studentId" column="student_id" jdbcType="INTEGER"/>
+        <result property="stuStatus" column="stu_status" jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="INTEGER"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TeaStuSubjectMap">
+        select
+          id, subject_id, teacher_id, student_id, stu_status, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.tea_stu_subject
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TeaStuSubjectMap">
+        select
+          id, subject_id, teacher_id, student_id, stu_status, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.tea_stu_subject
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TeaStuSubjectMap">
+        select
+          id, subject_id, teacher_id, student_id, stu_status, gmt_create, gmt_modified, is_delete
+        from QuestionnaireOnline.tea_stu_subject
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="teacherId != null">
+                and teacher_id = #{teacherId}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="stuStatus != null and stuStatus != ''">
+                and stu_status = #{stuStatus}
+            </if>
+            <if test="gmtCreate != null">
+                and gmt_create = #{gmtCreate}
+            </if>
+            <if test="gmtModified != null">
+                and gmt_modified = #{gmtModified}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into QuestionnaireOnline.tea_stu_subject(subject_id, teacher_id, student_id, stu_status, gmt_create, gmt_modified, is_delete)
+        values (#{subjectId}, #{teacherId}, #{studentId}, #{stuStatus}, #{gmtCreate}, #{gmtModified}, #{isDelete})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update QuestionnaireOnline.tea_stu_subject
+        <set>
+            <if test="subjectId != null">
+                subject_id = #{subjectId},
+            </if>
+            <if test="teacherId != null">
+                teacher_id = #{teacherId},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="stuStatus != null and stuStatus != ''">
+                stu_status = #{stuStatus},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from QuestionnaireOnline.tea_stu_subject where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.huafeng.springboot.questionnaireoline.dao.StudentDao">
+
+    <resultMap type="top.huafeng.springboot.questionnaireoline.entity.Student" id="StudentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="accountId" column="account_id" jdbcType="INTEGER"/>
+        <result property="studentId" column="student_id" jdbcType="VARCHAR"/>
+        <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
+        <result property="class" column="class" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="token" column="token" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="veriCode" column="veri_code" jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="INTEGER"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="StudentMap">
+        select
+          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+        from QuestionnaireOnline.student
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="StudentMap">
+        select
+          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+        from QuestionnaireOnline.student
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="StudentMap">
+        select
+          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+        from QuestionnaireOnline.student
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="accountId != null">
+                and account_id = #{accountId}
+            </if>
+            <if test="studentId != null and studentId != ''">
+                and student_id = #{studentId}
+            </if>
+            <if test="stuName != null and stuName != ''">
+                and stu_name = #{stuName}
+            </if>
+            <if test="class != null and class != ''">
+                and class = #{class}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                and mobile = #{mobile}
+            </if>
+            <if test="token != null and token != ''">
+                and token = #{token}
+            </if>
+            <if test="pwd != null and pwd != ''">
+                and pwd = #{pwd}
+            </if>
+            <if test="veriCode != null and veriCode != ''">
+                and veri_code = #{veriCode}
+            </if>
+            <if test="gmtCreate != null">
+                and gmt_create = #{gmtCreate}
+            </if>
+            <if test="gmtModified != null">
+                and gmt_modified = #{gmtModified}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into QuestionnaireOnline.student(account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status)
+        values (#{accountId}, #{studentId}, #{stuName}, #{class}, #{email}, #{mobile}, #{token}, #{pwd}, #{veriCode}, #{gmtCreate}, #{gmtModified}, #{status})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update QuestionnaireOnline.student
+        <set>
+            <if test="accountId != null">
+                account_id = #{accountId},
+            </if>
+            <if test="studentId != null and studentId != ''">
+                student_id = #{studentId},
+            </if>
+            <if test="stuName != null and stuName != ''">
+                stu_name = #{stuName},
+            </if>
+            <if test="class != null and class != ''">
+                class = #{class},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="mobile != null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="token != null and token != ''">
+                token = #{token},
+            </if>
+            <if test="pwd != null and pwd != ''">
+                pwd = #{pwd},
+            </if>
+            <if test="veriCode != null and veriCode != ''">
+                veri_code = #{veriCode},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from QuestionnaireOnline.student where id = #{id}
+    </delete>
+
+</mapper>
