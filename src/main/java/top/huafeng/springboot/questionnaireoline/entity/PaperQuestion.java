@@ -1,5 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-02-24 17:17:49
  */
+@Data
+@Builder
 public class PaperQuestion implements Serializable {
     private static final long serialVersionUID = 702358284545766649L;
     /**
@@ -54,94 +59,5 @@ public class PaperQuestion implements Serializable {
     * 是否有效
     */
     private int isDelete;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getPaperId() {
-        return paperId;
-    }
-
-    public void setPaperId(Integer paperId) {
-        this.paperId = paperId;
-    }
-
-    public int getQuestionType() {
-        return questionType;
-    }
-
-    public void setQuestionType(int questionType) {
-        this.questionType = questionType;
-    }
-
-    public Integer getQuestionNo() {
-        return questionNo;
-    }
-
-    public void setQuestionNo(Integer questionNo) {
-        this.questionNo = questionNo;
-    }
-
-    public Integer getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
-    }
-
-    public Object getQuestionScore() {
-        return questionScore;
-    }
-
-    public void setQuestionScore(Object questionScore) {
-        this.questionScore = questionScore;
-    }
-
-    public Integer getAccCount() {
-        return accCount;
-    }
-
-    public void setAccCount(Integer accCount) {
-        this.accCount = accCount;
-    }
-
-    public Integer getErrCount() {
-        return errCount;
-    }
-
-    public void setErrCount(Integer errCount) {
-        this.errCount = errCount;
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public int getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
-    }
 
 }

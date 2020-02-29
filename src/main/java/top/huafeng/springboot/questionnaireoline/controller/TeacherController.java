@@ -1,6 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import top.huafeng.springboot.questionnaireoline.entity.Teacher;
+import top.huafeng.springboot.questionnaireoline.service.SendByEmailTools;
 import top.huafeng.springboot.questionnaireoline.service.TeacherService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,30 @@ public class TeacherController {
      */
     @Resource
     private TeacherService teacherService;
+
+    @Autowired
+    private SendByEmailTools sendByEmailTools;
+
+    /*
+     **老师个人信息界面
+     */
+    @RequestMapping("/teacher/teacherinfo")
+    public String teacherInfo(){
+        return "/teacher/personalcenter/teacherinfo";
+    }
+
+    /*
+     **发送邮箱验证码接口
+     */
+    @GetMapping("/send")
+    public String send(){
+        String sender = "xindawy163@163.com";
+        String receiver = "1246801578@qq.com";
+        String title = "在线考试系统邮箱验证";
+        String text = "这是待完成的验证码";
+        String result = sendByEmailTools.send(sender, receiver, title, text);
+        return result;
+    }
 
     /**
      * 通过主键查询单条数据

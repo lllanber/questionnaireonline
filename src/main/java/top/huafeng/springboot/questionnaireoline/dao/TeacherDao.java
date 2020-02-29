@@ -62,4 +62,13 @@ public interface TeacherDao {
      */
     int deleteById(Integer id);
 
+    /*
+    **通过邮箱查询老师
+     */
+    Teacher queryByEmail(String email);
+
+    /*
+    **通过电话查询老师
+     */
+    Teacher queryByMobile(String mobile);
 }

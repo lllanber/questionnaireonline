@@ -22,6 +22,8 @@
     <link href="css/style-responsive.css" rel="stylesheet">
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 官网提供的 axios 在线地址 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -31,19 +33,19 @@
     *********************************************************************************************************************************************************** -->
 <div id="login-page">
     <div class="container">
-        <form class="form-login" action="index.html">
+        <form class="form-login">
             <a href="img/404.png"><h2 class="form-login-heading">登录</h2></a>
-            <div class="login-wrap">
-                <input type="text" class="form-control" placeholder="邮箱/手机" autofocus>
+            <div class="login-wrap" id="logindiv">
+                <input type="text" v-model="loginDTO.account" class="form-control" placeholder="邮箱/手机" autofocus>
                 <br>
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" v-model="loginDTO.password" class="form-control" placeholder="密码">
                 <label class="checkbox">
                     <input type="checkbox" value="remember-me"> 记住我
                     <span class="pull-right">
-            <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
-            </span>
+                        <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
+                    </span>
                 </label>
-                <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> 登 录</button>
+                <button class="btn btn-theme btn-block" @click="login()"><i class="fa fa-lock"></i> 登 录</button>
                 <hr>
                 <div class="login-social-link centered">
                     <p>其他方式登录</p>
@@ -57,7 +59,7 @@
                     </a>
                 </div>
             </div>
-            <!-- Modal -->
+            <!-- 重置密码Modal -->
             <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -91,9 +93,9 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+                        <label for="registEmail" class="col-sm-2 control-label">邮箱</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                            <input type="email" class="form-control" id="registEmail" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -115,7 +117,7 @@
                         </div>
                         <div class="col-sm-2 col-xs-2">
                             <button type="button" id="btnSendCode" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
-									<span class="register-msg-btn" v-show="show" v-on:click="getCode">
+									<span class="register-msg-btn" v-show="show" @click="getCode">
 										发送验证码
 									</span>
                                 <span class="register-msg-btn" v-show="!show">{{count}} s</span>
@@ -132,7 +134,7 @@
     </div>
 </div>
 </body>
-<!-- 发送验证码读秒 -->
+<!-- 注册模态框Vue -->
 <script>
     new Vue({
         el:'#registModal', //注册div的class
@@ -165,6 +167,30 @@
                     }, 1000)
                 }
             }
+        }
+    });
+</script>
+<!--登录Vue-->
+<script>
+    new Vue({
+        el:'#logindiv', //登录div
+        data:{
+            loginDTO : {
+                account:"",
+                password:""
+            }
+        },
+        methods:{
+            login() {
+                axios.post('/login', this.loginDTO)
+                    .then(res =>{
+                        console.log("登录成功")
+                        console.log(res);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
         }
     });
 </script>

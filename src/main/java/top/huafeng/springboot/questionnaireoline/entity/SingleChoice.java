@@ -1,5 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-02-24 17:17:49
  */
+@Data
+@Builder
 public class SingleChoice implements Serializable {
     private static final long serialVersionUID = -68024898807984282L;
     /**
@@ -79,141 +84,5 @@ public class SingleChoice implements Serializable {
     */
     private int isDelete;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Integer creator) {
-        this.creator = creator;
-    }
-
-    public int getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(int authority) {
-        this.authority = authority;
-    }
-
-    public String getSingleTitle() {
-        return singleTitle;
-    }
-
-    public void setSingleTitle(String singleTitle) {
-        this.singleTitle = singleTitle;
-    }
-
-    public String getChoiceA() {
-        return choiceA;
-    }
-
-    public void setChoiceA(String choiceA) {
-        this.choiceA = choiceA;
-    }
-
-    public String getChoiceB() {
-        return choiceB;
-    }
-
-    public void setChoiceB(String choiceB) {
-        this.choiceB = choiceB;
-    }
-
-    public String getChoiceC() {
-        return choiceC;
-    }
-
-    public void setChoiceC(String choiceC) {
-        this.choiceC = choiceC;
-    }
-
-    public String getChoiceD() {
-        return choiceD;
-    }
-
-    public void setChoiceD(String choiceD) {
-        this.choiceD = choiceD;
-    }
-
-    public String getChoiceE() {
-        return choiceE;
-    }
-
-    public void setChoiceE(String choiceE) {
-        this.choiceE = choiceE;
-    }
-
-    public String getChoiceF() {
-        return choiceF;
-    }
-
-    public void setChoiceF(String choiceF) {
-        this.choiceF = choiceF;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public String getParse() {
-        return parse;
-    }
-
-    public void setParse(String parse) {
-        this.parse = parse;
-    }
-
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public int getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
-    }
 
 }

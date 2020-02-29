@@ -1,5 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-02-24 17:17:48
  */
+@Data
+@Builder
 public class Paper implements Serializable {
     private static final long serialVersionUID = -89820690139063336L;
     /**
@@ -45,77 +50,5 @@ public class Paper implements Serializable {
     */
     private int status;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPaperName() {
-        return paperName;
-    }
-
-    public void setPaperName(String paperName) {
-        this.paperName = paperName;
-    }
-
-    public Integer getPaperCreator() {
-        return paperCreator;
-    }
-
-    public void setPaperCreator(Integer paperCreator) {
-        this.paperCreator = paperCreator;
-    }
-
-    public Object getPaperScore() {
-        return paperScore;
-    }
-
-    public void setPaperScore(Object paperScore) {
-        this.paperScore = paperScore;
-    }
-
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public Long getLimitTime() {
-        return limitTime;
-    }
-
-    public void setLimitTime(Long limitTime) {
-        this.limitTime = limitTime;
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
 }

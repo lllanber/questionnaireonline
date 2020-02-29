@@ -1,5 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-02-24 17:17:49
  */
+@Data
+@Builder
 public class StuPaper implements Serializable {
     private static final long serialVersionUID = -43475569618876700L;
     /**
@@ -75,133 +80,5 @@ public class StuPaper implements Serializable {
     */
     private Long gmtFinish;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getStuId() {
-        return stuId;
-    }
-
-    public void setStuId(Integer stuId) {
-        this.stuId = stuId;
-    }
-
-    public Integer getPaperId() {
-        return paperId;
-    }
-
-    public void setPaperId(Integer paperId) {
-        this.paperId = paperId;
-    }
-
-    public Object getStuScore() {
-        return stuScore;
-    }
-
-    public void setStuScore(Object stuScore) {
-        this.stuScore = stuScore;
-    }
-
-    public String getSingleAnswer() {
-        return singleAnswer;
-    }
-
-    public void setSingleAnswer(String singleAnswer) {
-        this.singleAnswer = singleAnswer;
-    }
-
-    public Object getSingleScore() {
-        return singleScore;
-    }
-
-    public void setSingleScore(Object singleScore) {
-        this.singleScore = singleScore;
-    }
-
-    public String getMultipleAnswer() {
-        return multipleAnswer;
-    }
-
-    public void setMultipleAnswer(String multipleAnswer) {
-        this.multipleAnswer = multipleAnswer;
-    }
-
-    public Object getMultipleScore() {
-        return multipleScore;
-    }
-
-    public void setMultipleScore(Object multipleScore) {
-        this.multipleScore = multipleScore;
-    }
-
-    public String getJudementAnswer() {
-        return judementAnswer;
-    }
-
-    public void setJudementAnswer(String judementAnswer) {
-        this.judementAnswer = judementAnswer;
-    }
-
-    public Object getJudementScore() {
-        return judementScore;
-    }
-
-    public void setJudementScore(Object judementScore) {
-        this.judementScore = judementScore;
-    }
-
-    public String getStatementAnswer() {
-        return statementAnswer;
-    }
-
-    public void setStatementAnswer(String statementAnswer) {
-        this.statementAnswer = statementAnswer;
-    }
-
-    public Object getStatementScore() {
-        return statementScore;
-    }
-
-    public void setStatementScore(Object statementScore) {
-        this.statementScore = statementScore;
-    }
-
-    public Object getTotalScore() {
-        return totalScore;
-    }
-
-    public void setTotalScore(Object totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    public Long getLimitTime() {
-        return limitTime;
-    }
-
-    public void setLimitTime(Long limitTime) {
-        this.limitTime = limitTime;
-    }
-
-    public Long getGmtStart() {
-        return gmtStart;
-    }
-
-    public void setGmtStart(Long gmtStart) {
-        this.gmtStart = gmtStart;
-    }
-
-    public Long getGmtFinish() {
-        return gmtFinish;
-    }
-
-    public void setGmtFinish(Long gmtFinish) {
-        this.gmtFinish = gmtFinish;
-    }
 
 }

@@ -7,7 +7,8 @@
         <result property="accountId" column="account_id" jdbcType="INTEGER"/>
         <result property="studentId" column="student_id" jdbcType="VARCHAR"/>
         <result property="stuName" column="stu_name" jdbcType="VARCHAR"/>
-        <result property="class" column="class" jdbcType="VARCHAR"/>
+        <result property="stuSex" column="stu_sex" jdbcType="VARCHAR"/>
+        <result property="classes" column="classes" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
         <result property="token" column="token" jdbcType="VARCHAR"/>
@@ -21,7 +22,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="StudentMap">
         select
-          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+          id, account_id, student_id, stu_name, stu_sex, classes, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
         from QuestionnaireOnline.student
         where id = #{id}
     </select>
@@ -29,7 +30,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="StudentMap">
         select
-          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+          id, account_id, student_id, stu_name, stu_sex, classes, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
         from QuestionnaireOnline.student
         limit #{offset}, #{limit}
     </select>
@@ -37,7 +38,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="StudentMap">
         select
-          id, account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
+          id, account_id, student_id, stu_name, stu_sex, classes, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status
         from QuestionnaireOnline.student
         <where>
             <if test="id != null">
@@ -52,8 +53,11 @@
             <if test="stuName != null and stuName != ''">
                 and stu_name = #{stuName}
             </if>
-            <if test="class != null and class != ''">
-                and class = #{class}
+            <if test="stuSex != null and stuSex != ''">
+                and stu_sex = #{stuSex}
+            </if>
+            <if test="classes != null and classes != ''">
+                and classes = #{classes}
             </if>
             <if test="email != null and email != ''">
                 and email = #{email}
@@ -84,8 +88,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into QuestionnaireOnline.student(account_id, student_id, stu_name, class, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status)
-        values (#{accountId}, #{studentId}, #{stuName}, #{class}, #{email}, #{mobile}, #{token}, #{pwd}, #{veriCode}, #{gmtCreate}, #{gmtModified}, #{status})
+        insert into QuestionnaireOnline.student(account_id, student_id, stu_name, stu_sex, classes, email, mobile, token, pwd, veri_code, gmt_create, gmt_modified, status)
+        values (#{accountId}, #{studentId}, #{stuName}, #{stuSex}, #{classes}, #{email}, #{mobile}, #{token}, #{pwd}, #{veriCode}, #{gmtCreate}, #{gmtModified}, #{status})
     </insert>
 
     <!--通过主键修改数据-->
@@ -101,8 +105,11 @@
             <if test="stuName != null and stuName != ''">
                 stu_name = #{stuName},
             </if>
-            <if test="class != null and class != ''">
-                class = #{class},
+            <if test="stuSex != null and stuSex != ''">
+                stu_sex = #{stuSex},
+            </if>
+            <if test="classes != null and classes != ''">
+                classes = #{classes},
             </if>
             <if test="email != null and email != ''">
                 email = #{email},

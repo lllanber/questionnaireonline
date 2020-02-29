@@ -7,6 +7,7 @@
         <result property="accountId" column="account_id" jdbcType="INTEGER"/>
         <result property="teacherId" column="teacher_id" jdbcType="VARCHAR"/>
         <result property="teaName" column="tea_name" jdbcType="VARCHAR"/>
+        <result property="teaSex" column="tea_sex" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
         <result property="token" column="token" jdbcType="VARCHAR"/>
@@ -20,15 +21,31 @@
     <!--查询单个-->
     <select id="queryById" resultMap="TeacherMap">
         select
-          id, account_id, teacher_id, tea_name, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
+          id, account_id, teacher_id, tea_name, tea_sex, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
         from QuestionnaireOnline.teacher
         where id = #{id}
+    </select>
+
+    <!--按邮箱查询-->
+    <select id="queryByEmail" resultMap="TeacherMap">
+        select
+          id, account_id, teacher_id, tea_name, tea_sex, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
+        from QuestionnaireOnline.teacher
+        where email = #{email}
+    </select>
+
+    <!--按电话查询-->
+    <select id="queryByMobile" resultMap="TeacherMap">
+        select
+          id, account_id, teacher_id, tea_name, tea_sex, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
+        from QuestionnaireOnline.teacher
+        where mobile = #{mobile}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="TeacherMap">
         select
-          id, account_id, teacher_id, tea_name, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
+          id, account_id, teacher_id, tea_name, tea_sex, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
         from QuestionnaireOnline.teacher
         limit #{offset}, #{limit}
     </select>
@@ -36,7 +53,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="TeacherMap">
         select
-          id, account_id, teacher_id, tea_name, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
+          id, account_id, teacher_id, tea_name, tea_sex, email, mobile, token, veri_code, pwd, gmt_create, gmt_modified, status
         from QuestionnaireOnline.teacher
         <where>
             <if test="id != null">
@@ -50,6 +67,9 @@
             </if>
             <if test="teaName != null and teaName != ''">
                 and tea_name = #{teaName}
+            </if>
+            <if test="teaSex != null and teaSex != ''">
+                and tea_sex = #{teaSex}
             </if>
             <if test="email != null and email != ''">
                 and email = #{email}

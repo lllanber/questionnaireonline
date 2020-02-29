@@ -1,5 +1,6 @@
 package top.huafeng.springboot.questionnaireoline.service.impl;
 
+import top.huafeng.springboot.questionnaireoline.Utils.Md5_Utils;
 import top.huafeng.springboot.questionnaireoline.entity.Teacher;
 import top.huafeng.springboot.questionnaireoline.dao.TeacherDao;
 import top.huafeng.springboot.questionnaireoline.service.TeacherService;
@@ -75,5 +76,29 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public boolean deleteById(Integer id) {
         return this.teacherDao.deleteById(id) > 0;
+    }
+
+
+    /*
+     **通过email或者手机号查找teacher对象
+     */
+    @Override
+    public Teacher queryByEmailOrPhone(String emailOrMobile, String pwd) {
+        boolean isEmail = emailOrMobile.contains("@");
+        if (isEmail){
+            String email = emailOrMobile;
+            Teacher teacher = this.teacherDao.queryByEmail(email);
+            if (teacher.getPwd().equals(Md5_Utils.getMD5Value(pwd))){
+                return teacher;
+            }
+            return null;
+        }else {
+            String mobile = emailOrMobile;
+            Teacher teacher = this.teacherDao.queryByMobile(mobile);
+            if (teacher.getPwd().equals(Md5_Utils.getMD5Value(pwd))){
+                return teacher;
+            }
+            return null;
+        }
     }
 }

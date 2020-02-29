@@ -52,4 +52,10 @@ public interface TeacherService {
      */
     boolean deleteById(Integer id);
 
+    /*
+    **通过email或者手机号查找teacher对象
+     */
+    Teacher queryByEmailOrPhone(String emailOrMobile, String pwd);
+
+
 }

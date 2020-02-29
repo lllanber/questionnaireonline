@@ -1,15 +1,20 @@
 package top.huafeng.springboot.questionnaireoline.entity;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
  * 学生表(Student)实体类
  *
  * @author makejava
- * @since 2020-02-24 17:17:49
+ * @since 2020-02-26 10:40:21
  */
+@Data
+@Builder
 public class Student implements Serializable {
-    private static final long serialVersionUID = 233890405752796223L;
+    private static final long serialVersionUID = 924623656362567328L;
     /**
     * 主键
     */
@@ -27,9 +32,13 @@ public class Student implements Serializable {
     */
     private String stuName;
     /**
+    * M-男，W-女
+    */
+    private String stuSex;
+    /**
     * 班级
     */
-    private String class;
+    private String classes;
     /**
     * 邮箱
     */
@@ -63,109 +72,5 @@ public class Student implements Serializable {
     */
     private int status;
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStuName() {
-        return stuName;
-    }
-
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
-    }
-
-    public String getClass() {
-        return class;
-    }
-
-    public void setClass(String class) {
-        this.class = class;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getVeriCode() {
-        return veriCode;
-    }
-
-    public void setVeriCode(String veriCode) {
-        this.veriCode = veriCode;
-    }
-
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Long getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
 }

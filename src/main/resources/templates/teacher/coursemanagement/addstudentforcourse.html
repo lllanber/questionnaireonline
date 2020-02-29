@@ -13,7 +13,7 @@
     <!-- MAIN CONTENT-->
     <!--main content start-->
     <section id="main-content">
-        <section class="wrapper site-min-height">
+        <section class="wrapper site-min-height" id="app">
             <h3><i class="fa fa-angle-right"></i> 所有课程-课程名</h3>
             <div class="row mt">
                 <!--  PROFILE 01 PANEL -->
@@ -32,59 +32,23 @@
                                 <hr>
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th><i class="fa fa-bullhorn"></i> 学号</th>
+                                    <th><i class="fa fa-bookmark"></i> 序号</th>
                                     <th><i class="fa fa-bookmark"></i> 班级</th>
+                                    <th><i class="fa fa-bullhorn"></i> 学号</th>
                                     <th><i class="fa fa-bookmark"></i> 姓名</th>
-                                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
-                                    <th><i class="fa fa-bookmark"></i> 分数</th>
+                                    <th><i class="fa fa-bookmark"></i> 性别</th>
                                     <th><i class=" fa fa-edit"></i> 状态</th>
                                     <th><i class=" fa fa-edit"></i> 操作</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody v-for="(item,index) in students">
                                 <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <a href="basic_table.html#">201607151</a>
-                                    </td>
-                                    <td>计算164 </td>
-                                    <td>小明 </td>
-                                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                    <td>100分 </td>
-                                    <td><span class="label label-info label-mini">重修</span></td>
-                                    <td>
-                                        <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                        <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <a href="basic_table.html#">201607152</a>
-                                    </td>
-                                    <td>计算164 </td>
-                                    <td>小刚 </td>
-                                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                    <td>100分 </td>
-                                    <td><span class="label label-warning label-mini">其他</span></td>
-                                    <td>
-                                        <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                        <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <a href="basic_table.html#">201607153</a>
-                                    </td>
-                                    <td>计算164 </td>
-                                    <td>小红 </td>
-                                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                    <td>100分 </td>
-                                    <td><span class="label label-success label-mini">正常</span></td>
+                                    <td>{{index+1}} </td>
+                                    <td>{{item.classes}} </td>
+                                    <td>{{item.studentId}} </td>
+                                    <td>{{item.stuName}}</td>
+                                    <td>{{item.stuSex}}</td>
+                                    <td><span class="label label-info label-mini">{{item.stuStatus}}</span></td>
                                     <td>
                                         <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
                                         <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
@@ -108,4 +72,23 @@
 </section>
 </body>
 <div th:insert="~{/teacher/menu.html :: commenjs}"></div>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            students:[
+                {
+                    classes:"计算165",
+                    studentId:"20160000",
+                    stuName:"小明",
+                    stuSex:"男",
+                    stuStatus:"正常"
+                }
+            ]
+        },
+        methods:{
+
+        }
+    })
+</script>
 </html>
