@@ -12,6 +12,11 @@ import java.util.List;
  */
 public interface StudentDao {
 
+    /*
+    **通过课程id 和 老师id 查出该课程学生
+     */
+    List<Student> queryBySubjectId(Integer subjectId, Integer teacherId);
+
     /**
      * 通过ID查询单条数据
      *

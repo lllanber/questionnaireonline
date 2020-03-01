@@ -1,5 +1,7 @@
 package top.huafeng.springboot.questionnaireoline.service;
 
+import top.huafeng.springboot.questionnaireoline.dto.SubjectWithStudentDTO;
+import top.huafeng.springboot.questionnaireoline.entity.Student;
 import top.huafeng.springboot.questionnaireoline.entity.TeaStuSubject;
 import java.util.List;
 
@@ -9,7 +11,12 @@ import java.util.List;
  * @author makejava
  * @since 2020-02-24 17:17:48
  */
-public interface TeaStuSubjectService {
+public interface ManageStudentService {
+
+    /*
+     **通过 课程id(前端传过来），老师id（Session获取） 查询学生
+     */
+    SubjectWithStudentDTO findByCourseId(Integer courseId, Integer teacherId);
 
     /**
      * 通过ID查询单条数据

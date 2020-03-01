@@ -1,6 +1,7 @@
 package top.huafeng.springboot.questionnaireoline.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import top.huafeng.springboot.questionnaireoline.entity.Teacher;
 import top.huafeng.springboot.questionnaireoline.service.SendByEmailTools;
 import top.huafeng.springboot.questionnaireoline.service.TeacherService;
@@ -14,7 +15,7 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2020-02-24 17:17:49
  */
-@RestController
+@Controller
 @RequestMapping("teacher")
 public class TeacherController {
     /**
@@ -29,7 +30,7 @@ public class TeacherController {
     /*
      **老师个人信息界面
      */
-    @RequestMapping("/teacher/teacherinfo")
+    @RequestMapping("teacherinfo")
     public String teacherInfo(){
         return "/teacher/personalcenter/teacherinfo";
     }
@@ -37,7 +38,7 @@ public class TeacherController {
     /*
      **发送邮箱验证码接口
      */
-    @GetMapping("/send")
+    @GetMapping("send")
     public String send(){
         String sender = "xindawy163@163.com";
         String receiver = "1246801578@qq.com";

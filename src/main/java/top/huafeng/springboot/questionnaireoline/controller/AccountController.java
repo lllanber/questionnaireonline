@@ -5,10 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import top.huafeng.springboot.questionnaireoline.dto.LoginDTO;
 import top.huafeng.springboot.questionnaireoline.entity.Teacher;
 import top.huafeng.springboot.questionnaireoline.service.impl.TeacherServiceImpl;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AccountController {
@@ -18,17 +21,21 @@ public class AccountController {
     **处理index.html登录请求
      */
     @PostMapping("/login")
-    public @ResponseBody Teacher login(@RequestBody LoginDTO loginDTO){
-        System.out.println("loginDTO = " + loginDTO);
+    public String login(
+            @RequestBody LoginDTO loginDTO,
+            HttpServletRequest request,
+            HttpServletResponse response){
+        System.out.println("AccountController22：拿到loginDTO = " + loginDTO);
         String account = loginDTO.getAccount();
         String password = loginDTO.getPassword();
-        System.out.println("account = " + account);
-        System.out.println("password = " + password);
         Teacher teacher = teacherService.queryByEmailOrPhone(account, password);
-        System.out.println("teacher = " + teacher);
+//        System.out.println("teacher = " + teacher);
         if (teacher != null){
-            return teacher;
+            request.getSession().setAttribute("teacherInfo", teacher);
+            System.out.println("teacherInfo 的Session已经设置好");
+            response.addCookie(new Cookie("teacherToken", teacher.getToken()));
+            return "/teacher/coursemanagement/addstudentforcourse";
         }
-        return null;
+        return "redirect:/";
     }
 }

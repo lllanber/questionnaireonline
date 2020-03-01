@@ -19,6 +19,12 @@
         <result property="status" column="status" jdbcType="OTHER"/>
     </resultMap>
 
+    <!--根据课程和老师id 查询出课程对应学生-->
+    <select id="queryBySubjectId" resultMap="StudentMap">
+        select * from QuestionnaireOnline.student where id in
+        (select student_id from QuestionnaireOnline.tea_stu_subject where teacher_id=#{subjectId} and #{teacherId})
+    </select>
+
     <!--查询单个-->
     <select id="queryById" resultMap="StudentMap">
         select

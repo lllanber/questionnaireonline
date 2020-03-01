@@ -22,6 +22,8 @@
     <link href="css/style-responsive.css" rel="stylesheet">
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-cookies@1.7.0/vue-cookies.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <!-- 官网提供的 axios 在线地址 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -33,7 +35,7 @@
     *********************************************************************************************************************************************************** -->
 <div id="login-page">
     <div class="container">
-        <form class="form-login">
+        <div class="form-login">
             <a href="img/404.png"><h2 class="form-login-heading">登录</h2></a>
             <div class="login-wrap" id="logindiv">
                 <input type="text" v-model="loginDTO.account" class="form-control" placeholder="邮箱/手机" autofocus>
@@ -45,7 +47,7 @@
                         <a data-toggle="modal" href="login.html#myModal"> 忘记密码?</a>
                     </span>
                 </label>
-                <button class="btn btn-theme btn-block" @click="login()"><i class="fa fa-lock"></i> 登 录</button>
+                <button class="btn btn-theme btn-block" @click="login"><i class="fa fa-lock"></i> 登 录</button>
                 <hr>
                 <div class="login-social-link centered">
                     <p>其他方式登录</p>
@@ -79,7 +81,7 @@
                 </div>
             </div>
             <!-- modal -->
-        </form>
+        </div>
     </div>
 </div>
 <!-- 注册账号模态框 -->
@@ -184,10 +186,10 @@
             login() {
                 axios.post('/login', this.loginDTO)
                     .then(res =>{
-                        console.log("登录成功")
-                        console.log(res);
+                        console.log("登录成功");
                     })
                     .catch(function (error) {
+                        alert("账号或密码不正确");
                         console.log(error);
                     });
             },

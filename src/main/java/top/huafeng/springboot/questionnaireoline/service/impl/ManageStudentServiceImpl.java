@@ -1,8 +1,14 @@
 package top.huafeng.springboot.questionnaireoline.service.impl;
 
+import org.springframework.beans.BeanUtils;
+import top.huafeng.springboot.questionnaireoline.dao.StudentDao;
+import top.huafeng.springboot.questionnaireoline.dao.SubjectDao;
+import top.huafeng.springboot.questionnaireoline.dto.SubjectWithStudentDTO;
+import top.huafeng.springboot.questionnaireoline.entity.Student;
+import top.huafeng.springboot.questionnaireoline.entity.Subject;
 import top.huafeng.springboot.questionnaireoline.entity.TeaStuSubject;
 import top.huafeng.springboot.questionnaireoline.dao.TeaStuSubjectDao;
-import top.huafeng.springboot.questionnaireoline.service.TeaStuSubjectService;
+import top.huafeng.springboot.questionnaireoline.service.ManageStudentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,10 +20,34 @@ import java.util.List;
  * @author makejava
  * @since 2020-02-24 17:17:48
  */
-@Service("teaStuSubjectService")
-public class TeaStuSubjectServiceImpl implements TeaStuSubjectService {
+@Service("ManageStudentService")
+public class ManageStudentServiceImpl implements ManageStudentService {
+
     @Resource
     private TeaStuSubjectDao teaStuSubjectDao;
+
+    @Resource
+    private SubjectDao subjectDao;
+
+    @Resource
+    private StudentDao studentDao;
+
+    @Override
+    public SubjectWithStudentDTO findByCourseId(Integer subjectId, Integer teacherId) {
+        //1.查询到课程信息
+        Subject subject = this.subjectDao.queryById(subjectId);
+        //System.out.println("课程信息查询 subject = " + subject);
+        //2.查询到课程学生的信息
+        List<Student> list = this.studentDao.queryBySubjectId(subjectId, teacherId);
+        //System.out.println("学生信息查询list = " + list);
+
+        //3.把课程信息和学生集合打包 ps: subjectWithStudentDTO 必须有全参和无参数构造器。否则报异常
+        SubjectWithStudentDTO subjectWithStudentDTO = new SubjectWithStudentDTO();
+        subjectWithStudentDTO.setSubject(subject);
+        subjectWithStudentDTO.setList(list);
+
+        return subjectWithStudentDTO;
+    }
 
     /**
      * 通过ID查询单条数据
