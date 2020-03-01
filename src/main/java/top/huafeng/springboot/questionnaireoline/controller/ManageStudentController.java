@@ -1,6 +1,8 @@
 package top.huafeng.springboot.questionnaireoline.controller;
 
+import top.huafeng.springboot.questionnaireoline.Utils.ApiResultHandler;
 import top.huafeng.springboot.questionnaireoline.dto.SubjectWithStudentDTO;
+import top.huafeng.springboot.questionnaireoline.entity.ApiResult;
 import top.huafeng.springboot.questionnaireoline.entity.Student;
 import top.huafeng.springboot.questionnaireoline.entity.TeaStuSubject;
 import top.huafeng.springboot.questionnaireoline.service.ManageStudentService;
@@ -24,25 +26,30 @@ public class ManageStudentController {
     @Resource
     private ManageStudentService manageStudentService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public TeaStuSubject selectOne(Integer id) {
-        return this.manageStudentService.queryById(id);
-    }
-
     /*
     **通过 课程id(前端传过来），老师id（Session获取） 查询学生
     * 未完成，没有从Session中获取teacher的id
      */
-    @GetMapping("/{courseId}")
-    public @ResponseBody SubjectWithStudentDTO findByCourseId(@PathVariable("courseId") Integer courseId){
+    @GetMapping("/{subjectId}")
+    public @ResponseBody SubjectWithStudentDTO findByCourseId(@PathVariable("subjectId") Integer subjectId){
+        //模拟Session传入
         Integer teacherId = 1;
-        SubjectWithStudentDTO subjectWithStudentDTO = manageStudentService.findByCourseId(courseId, teacherId);
+        SubjectWithStudentDTO subjectWithStudentDTO = manageStudentService.findByCourseId(subjectId, teacherId);
         return subjectWithStudentDTO;
+    }
+
+    /*
+    **将学生从该课程中删除，操作的是tea_stu_sub表，非student表
+    * @Param: courseId:课程id 前端传入。  studentId学生id  前端传入。  teacherId老师id Session获取
+     */
+    @DeleteMapping("/{subjectId}/{studentId}")
+    public @ResponseBody
+    ApiResult deleteByStudentId(
+            @PathVariable("subjectId") Integer subjectId,
+            @PathVariable("studentId") Integer studentId){
+        //模拟Session传入
+        Integer teacherId = 1;
+        int res = manageStudentService.deleteByStudentId(subjectId, teacherId, studentId);
+        return ApiResultHandler.buildApiResult(200, "删除成功", res);
     }
 }

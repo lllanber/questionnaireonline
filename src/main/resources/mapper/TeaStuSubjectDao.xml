@@ -13,6 +13,11 @@
         <result property="isDelete" column="is_delete" jdbcType="OTHER"/>
     </resultMap>
 
+    <!--按课程 老师 学生 id 删除1条数据-->
+    <delete id="deleteByStudentId">
+        delete from QuestionnaireOnline.tea_stu_subject where subject_id=#{subjectId} and teacher_id=#{teacherId} and student_id=#{studentId}
+    </delete>
+
     <!--查询单个-->
     <select id="queryById" resultMap="TeaStuSubjectMap">
         select

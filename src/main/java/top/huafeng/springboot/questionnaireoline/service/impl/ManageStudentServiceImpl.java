@@ -32,6 +32,12 @@ public class ManageStudentServiceImpl implements ManageStudentService {
     @Resource
     private StudentDao studentDao;
 
+    /**
+     *  按条件查询学生
+     *
+     * @param  subjectId 课程id 老师id（Session获取）
+     * @return 课程信息+该课程的所有学生信息
+     */
     @Override
     public SubjectWithStudentDTO findByCourseId(Integer subjectId, Integer teacherId) {
         //1.查询到课程信息
@@ -47,6 +53,18 @@ public class ManageStudentServiceImpl implements ManageStudentService {
         subjectWithStudentDTO.setList(list);
 
         return subjectWithStudentDTO;
+    }
+
+    /**
+     * 按条件删除数据
+     *
+     * @param  subjectId 课程id teacherId 老师id studentId学生id
+     * @return 删除的行数
+     */
+    @Override
+    public int deleteByStudentId(Integer subjectId, Integer teacherId, Integer studentId) {
+        teaStuSubjectDao.deleteByStudentId(subjectId, teacherId, studentId);
+        return 1;
     }
 
     /**
@@ -106,4 +124,5 @@ public class ManageStudentServiceImpl implements ManageStudentService {
     public boolean deleteById(Integer id) {
         return this.teaStuSubjectDao.deleteById(id) > 0;
     }
+
 }

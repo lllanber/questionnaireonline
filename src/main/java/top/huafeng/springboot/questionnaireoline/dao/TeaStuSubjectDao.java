@@ -13,6 +13,13 @@ import java.util.List;
 public interface TeaStuSubjectDao {
 
     /**
+     * 按条件删除数据
+     *
+     * @param  subjectId 课程id teacherId 老师id studentId学生id
+     */
+    void deleteByStudentId(Integer subjectId, Integer teacherId, Integer studentId);
+
+    /**
      * 通过ID查询单条数据
      *
      * @param id 主键

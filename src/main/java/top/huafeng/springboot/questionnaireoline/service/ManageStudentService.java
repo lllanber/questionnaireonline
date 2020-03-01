@@ -13,10 +13,21 @@ import java.util.List;
  */
 public interface ManageStudentService {
 
-    /*
-     **通过 课程id(前端传过来），老师id（Session获取） 查询学生
+    /**
+     *  按条件查询学生
+     *
+     * @param  subjectId 课程id 老师id（Session获取）
+     * @return 课程信息+该课程的所有学生信息
      */
-    SubjectWithStudentDTO findByCourseId(Integer courseId, Integer teacherId);
+    SubjectWithStudentDTO findByCourseId(Integer subjectId, Integer teacherId);
+
+    /**
+     * 按条件删除数据
+     *
+     * @param  courseId 课程id teacherId 老师id studentId学生id
+     * @return 删除的行数
+     */
+    int deleteByStudentId(Integer courseId, Integer teacherId, Integer studentId);
 
     /**
      * 通过ID查询单条数据
